@@ -1,0 +1,9 @@
+version: '2'
+services:
+  revprox:
+    build: ./
+    image: revprox
+    environment:
+      - VHOST=dev.xmart.de
+      - TARGET=websrv
+

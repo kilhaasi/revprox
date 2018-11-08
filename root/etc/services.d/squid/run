@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv bash
+
+echo "Creating squid configuration..."
+
+>/etc/squid/squid.conf
+echo "http_port 80 accel defaultsite=$VHOST" >> /etc/squid/squid.conf
+echo "cache_peer $TARGET 80 0 no-query $TARGET name=$TARGET" >> /etc/squid/squid.conf
+echo "acl $TARGET dstdomain $VHOST" >> /etc/squid/squid.conf
+echo "http_access allow $TARGET" >> /etc/squid/squid.conf
+echo "cache_peer_access $TARGET allow $TARGET" >> /etc/squid/squid.conf
+echo "cache_peer_access $TARGET deny all" >> /etc/squid/squid.conf
+
+squid -N -f /etc/squid/squid.conf 
