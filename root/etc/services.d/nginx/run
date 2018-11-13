@@ -1,0 +1,25 @@
+#!/usr/bin/with-contenv bash
+
+if [[ -s /cert/cert.pem ]]
+then
+ echo "Using existing certificate..."
+else
+ echo "Generating selfsigned certificate..."
+ openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout /cert/privkey.pem -days 10 -out /cert/cert.pem -batch
+fi
+
+echo "Creating nginx configuration..."
+
+>/etc/nginx/conf.d/$VHOST.conf
+echo "server {
+  listen 80;
+  listen [::]:80;
+
+  server_name example.com;
+
+  location / {
+      proxy_pass http://localhost:3000/;
+  }
+}" >> /etc/nginx/conf.d/$VHOST.conf
+
+nginx

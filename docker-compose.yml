@@ -6,4 +6,7 @@ services:
     environment:
       - VHOST=dev.xmart.de
       - TARGET=websrv
-
+    ports:
+      - 443:443
+  websrv:
+    image: nginx
