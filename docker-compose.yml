@@ -5,8 +5,6 @@ services:
     image: revprox
     environment:
       - VHOST=dev.xmart.de
-      - TARGET=websrv
+      - TARGET=dehocpr1201.xmart.side
     ports:
       - 443:443
-  websrv:
-    image: nginx

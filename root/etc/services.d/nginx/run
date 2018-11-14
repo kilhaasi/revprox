@@ -12,14 +12,15 @@ echo "Creating nginx configuration..."
 
 >/etc/nginx/conf.d/$VHOST.conf
 echo "server {
-  listen 80;
-  listen [::]:80;
-
-  server_name example.com;
+  listen 443 ssl;
+  server_name $VHOST;
+  ssl_certificate /cert/cert.pem;
+  ssl_certificate_key /cert/privkey.pem;
 
   location / {
-      proxy_pass http://localhost:3000/;
+      proxy_pass http://$TARGET/;
   }
 }" >> /etc/nginx/conf.d/$VHOST.conf
 
 nginx
+tail -f /var/log/nginx/access.log

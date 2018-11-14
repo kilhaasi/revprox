@@ -5,7 +5,7 @@ ADD https://github.com/just-containers/s6-overlay/releases/download/v1.21.7.0/s6
 RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
 
 RUN apt update
-RUN apt install -y nginx curl tcpdump openssl net-tools
+RUN apt install -y nginx curl tcpdump openssl net-tools vim
 
 COPY root/ /
 
