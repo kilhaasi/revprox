@@ -4,7 +4,7 @@ services:
     build: ./
     image: revprox
     environment:
-      - VHOST=dev.xmart.de
-      - TARGET=dehocpr1201.xmart.side
+      - VHOST=[VHOST used in HTTP-GET]
+      - TARGET=[backend http server]
     ports:
       - 443:443
